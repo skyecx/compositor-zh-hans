@@ -1,0 +1,50 @@
+name: 词条翻译纠错
+description: 某处中文翻译不准确、不符合 Photoshop 用语，或者仍是英文
+title: "[翻译] "
+labels: ["翻译"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢帮忙打磨用语！提交前请先确认语言包已生效（菜单应为中文）。
+  - type: input
+    id: location
+    attributes:
+      label: 出现在哪里
+      description: 菜单路径 / 面板名 / 对话框，越具体越好
+      placeholder: 图层 › 混合模式 下拉菜单
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: 现在显示成什么
+      placeholder: Merge Down
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: 建议改成什么
+      placeholder: 向下合并
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Compositor 版本
+      description: 菜单「Compositor › 关于 Compositor」里可以看到
+      placeholder: 1.0.4
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 类型
+      options:
+        - 翻译不准 / 不符合 Photoshop 用语
+        - 完全是英文（可能属于 B 类，见 README 已知限制）
+        - 排版 / 标点问题
+        - 其它
+    validations:
+      required: true

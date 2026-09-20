@@ -1,0 +1,28 @@
+name: 校验语言包
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 语法与一致性校验
+        run: python3 tools/check-strings.py
+
+      - name: 确认术语对照表与语言包同步
+        run: |
+          python3 tools/gen-glossary.py
+          if ! git diff --quiet docs/术语对照表.md; then
+            echo "::error::docs/术语对照表.md 与语言包不一致，请运行 python3 tools/gen-glossary.py 并提交改动"
+            git diff --stat docs/术语对照表.md
+            exit 1
+          fi
+
+      - name: 统计词条数
+        run: |
+          n=$(grep -cE '^"[^"]+"\s*=\s*"' zh-Hans.lproj/Localizable.strings)
+          echo "### 语言包词条数：$n" >> "$GITHUB_STEP_SUMMARY"

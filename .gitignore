@@ -1,0 +1,12 @@
+# 工具生成的临时文件
+missing.txt
+candidates.txt
+stale.txt
+
+# macOS
+.DS_Store
+
+# 备份 / 临时
+*.bak
+*.orig
+*~
