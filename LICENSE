@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-本仓库（含脚本与简体中文语言包）为独立第三方作品，与 Compositor 官方
-（robbietilton）无任何隶属关系，也未获得其背书。
-
-本仓库不包含、不分发 Compositor 本体程序。使用者需自行从官方渠道获取
-Compositor，并遵守其原始许可协议（MIT）。语言包中的界面用语属于通用技术
-术语，脚本为原创实现，均可按上方的 MIT 协议自由使用。

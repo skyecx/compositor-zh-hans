@@ -232,6 +232,7 @@ python3 tools/gen-glossary.py       # 对照表要同步提交
 - 本项目是第三方爱好者作品，**与 Compositor 官方无隶属关系**，也未获其背书。
 - Compositor 本身也是 MIT 协议，版权归其作者所有。
 - 汉化会修改 App 包内容并重新签名，请自行评估风险。
+- 更详细的权属说明见 [NOTICE.md](NOTICE.md)。
 
 如果这个项目帮到了你，记得去给[上游](https://github.com/robbietilton/Compositor)
 点个 ⭐。
