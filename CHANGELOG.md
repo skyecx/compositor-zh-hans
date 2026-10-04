@@ -2,6 +2,27 @@
 
 本项目的版本号跟随上游：`<Compositor 版本>-<语言包修订号>`。
 
+## 1.4.5-1 — 2026-10-03
+
+### 新增
+- 适配 Compositor **1.4.5**（CFBundleVersion ?，待校验），覆盖自 1.0.4 以来的新增 UI 文本。
+- 用 `tools/extract-missing.py` 对 v1.4.5 源码扫描，发现并补齐 **182 条**新词条：
+  - Camera Raw 整套面板（ColorControls / DetailOptics / GeometryCalibration / Calibration / Slider）
+  - 视图：Grid / Guides / Rulers / Snap To / Lock Guides / Clear Guides / Document Bounds / Grid Settings
+  - 选区：Color Range / Subject / Expand / Contract / Feather / Trim / Edge（魔棒/对象子选区）
+  - 文字：Tracking / Leading / Edit Text / Done / Text color / 字体属性
+  - 滤镜：Dither 的 Scanlines (CRT) 风格（Pixel Shape / Light on Dark / Glow / Dots / Wobble）
+  - 效果：Stroke / Position / Outside / Inside / Drop Shadow / Inner Shadow / Inner Glow / Outer Glow / Color Overlay
+  - 类型：Develop “%@”、Import、Reading the Photoshop file…、Preset sizes
+  - 其他：Keyboard Shortcuts 编辑器、Restore Defaults、Tooltip 全文
+- 语言包词条数 523 → **705**。
+
+### 修复
+- `tools/check-strings.py` 和 `tools/extract-missing.py` 的 ENTRY 正则允许「;」后挂 `// 注释`，方便追踪每个词条的源码位置。原版严格 `;\s*$`，会导致脚本看不到新加的带注释条目。
+- `tools/reorganize-strings.py` 同样放宽 ENTRY 正则。
+
+[1.4.5-1]: https://github.com/skyecx/compositor-zh-hans/releases
+
 ## 1.0.4-2 — 2026-09-20
 
 ### 新增

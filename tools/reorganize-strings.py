@@ -17,7 +17,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TARGET = os.path.join(ROOT, "zh-Hans.lproj", "Localizable.strings")
 
-ENTRY = re.compile(r'^\s*"((?:[^"\\]|\\.)*)"\s*=\s*"((?:[^"\\]|\\.)*)"\s*;\s*$')
+ENTRY = re.compile(r'^\s*"((?:[^"\\]|\\.)*)"\s*=\s*"((?:[^"\\]|\\.)*)"\s*;\s*(?://.*)?$')
 SECTION = re.compile(r'^\s*/\*\s*[=\-]{3,}\s*(.+?)\s*[=\-]{3,}\s*\*/\s*$')
 
 # 规范分区（决定输出顺序）
