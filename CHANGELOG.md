@@ -2,6 +2,31 @@
 
 本项目的版本号跟随上游：`<Compositor 版本>-<语言包修订号>`。
 
+## 1.4.5-2 — 2026-10-05
+
+### 新增
+- 从 `tools/extract-missing.py` 的 candidates.txt 补齐 **88 条**遗漏：
+  - 工具按钮 tooltip（Marquee/Lasso/Magic/Brush/Spot Healing/Clone Stamp/Smear/Gradient/Shape/Crop/Move/Hand/Zoom/Eyedropper/Type）—— 已加入语言包。**注**：`.help(tool.label)` 当前源码走 `StringProtocol` 重载（swiftui verbatim），**不会**查语言包；它们仅作未来源码切到 `LocalizedStringKey` 时的准备。
+  - AX 标签：`Font`、`Blend mode`、`Canvas text`、`Canvas`、`Horizontal ruler`、`Vertical ruler`、`Press keys…`、`Press a shortcut` —— `setAccessibilityLabel(String)` 同上为 verbatim，本版本不生效。
+  - Color Picker 标题（10 条：Text/Background/Foreground/Gradient Map Highlights/Shadows/Vignette/Dither Light/Dark/%@）—— 这些 `NSAlert`/AppKit 字面量**会自动查表**，v1.4.5-2 起生效。
+  - 错误/提示（14 条）：「已选中多个图层」、「%@」是文件夹 / 隐藏 / 调整图层、「图层蒙版已关闭」、「对象选择需要 macOS 14」、「复制的图层超出 %@ 兆像素」等。
+  - 引导线颜色（7 条：浅灰/浅蓝/浅红/中蓝/黄/品红/青）。
+  - 滤镜名（4 条：光晕/辉光、抖动、色调对比度、Camera Raw 滤镜）。
+  - 调整图层/混合模式（10 条：色彩平衡、柔光/强光/亮光/线性光/点光/实色混合/排除/划分/线性加深/线性减淡）。
+  - 显示选区/隐藏菜单/羽化选区/新建文字图层/对象选择等。
+- 修正两处原翻译：
+  - `Type`：`类型` → **`字体`**（按用户反馈；`Text("Type")` at TypeControls 文字工具面板 header）
+  - `Magic Wand`：`魔棒` → **`魔法棒`**（按用户偏好统一 Wand/Magic 三个 key）
+- 词条总数 705 → **793**。
+
+### 仍无法覆盖的「B 类」（需上游改源码）
+1. `.help(String)` / `.accessibilityLabel(String)` —— swiftui StringProtocol 重载，verbatim 不查表。需把源码改成 `.help(LocalizedStringKey(...))`。
+2. `Text(condition ? "X" : "Y")` 三元式 —— 类型推断为 `String`，走 verbatim 重载。需拆成显式 `LocalizedStringKey` 或两个独立分支。
+3. `button.setAccessibilityLabel("X")`（AppKit 路径）—— 接 String 不查表；需 `setAccessibilityLabel(LocalizedStringKey("X"))` 或 `setAccessibilityLabel(NSAttributedString(string: NSLocalizedString("X", comment: "")))`。
+4. 计算属性 `var label: String { ... }`（如 NavigationTool.label）同上，verbatim 返回 String。
+
+[1.4.5-2]: https://github.com/skyecx/compositor-zh-hans/releases
+
 ## 1.4.5-1 — 2026-10-03
 
 ### 新增

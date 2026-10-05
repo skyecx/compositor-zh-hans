@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Compositor](https://img.shields.io/badge/Compositor-1.4.5-success.svg)](https://github.com/robbietilton/Compositor)
-[![词条](https://img.shields.io/badge/词条-705-orange.svg)](docs/术语对照表.md)
+[![词条](https://img.shields.io/badge/词条-793-orange.svg)](docs/术语对照表.md)
 
 [Compositor](https://github.com/robbietilton/Compositor) 是一个用 SwiftUI 写的原生 macOS
 图像编辑器。它本身不带任何多语言支持（界面文案全部硬编码英文、没有 `.lproj`、
@@ -92,7 +92,7 @@ graph LR
 | `安装自动恢复.command` | 单独安装 LaunchAgent 守护（`一键汉化` 已包含） |
 | `watchdog.sh` | 守护脚本本体，被 LaunchAgent 调用 |
 | `卸载汉化.sh` | 移除语言包、恢复 Info.plist、卸载守护 |
-| `zh-Hans.lproj/Localizable.strings` | **语言包本体**，705 条词条 |
+| `zh-Hans.lproj/Localizable.strings` | **语言包本体**，793 条词条 |
 | `docs/研究报告.md` | 逆向过程、踩坑记录、覆盖率分析 |
 | `docs/术语对照表.md` | 全部词条的中英对照（自动生成） |
 | `tools/` | 维护工具（提取新词条、校验、生成对照表） |
