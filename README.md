@@ -6,6 +6,9 @@
 [![Compositor](https://img.shields.io/badge/Compositor-1.5.3-success.svg)](https://github.com/robbietilton/Compositor)
 [![词条](https://img.shields.io/badge/词条-926-orange.svg)](docs/术语对照表.md)
 
+> **当前适配**：[Compositor 1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3)（CFBundleVersion 49）· 语言包 926 条 · 最近更新 2026-10-19
+> 版本变化看 [Releases](https://github.com/skyecx/compositor-zh-hans/releases) / [CHANGELOG.md](CHANGELOG.md)。
+
 [Compositor](https://github.com/robbietilton/Compositor) 是一个用 SwiftUI 写的原生 macOS
 图像编辑器。它本身不带任何多语言支持（界面文案全部硬编码英文、没有 `.lproj`、
 没有插件系统），所以本仓库用**外部注入**的方式给它加上简体中文：
@@ -93,6 +96,7 @@ graph LR
 | `watchdog.sh` | 守护脚本本体，被 LaunchAgent 调用 |
 | `卸载汉化.sh` | 移除语言包、恢复 Info.plist、卸载守护 |
 | `zh-Hans.lproj/Localizable.strings` | **语言包本体**，926 条词条 |
+| `CHANGELOG.md` | 每个语言包版本改了什么（翻译批次、工具修复、已知限制变化） |
 | `docs/研究报告.md` | 逆向过程、踩坑记录、覆盖率分析 |
 | `docs/术语对照表.md` | 全部词条的中英对照（自动生成） |
 | `tools/` | 维护工具（提取新词条、校验、生成对照表） |
@@ -161,9 +165,13 @@ bash 一键汉化.command                # 装到 App 上验证
 
 ## 已知限制
 
-**约 95% 的界面文本**能通过语言包覆盖。剩下约 5% 的文本**在原理上无法**用
-`.strings` 覆盖，因为它们走的是 SwiftUI 的「逐字渲染」通道（`Text(_ content: some
-StringProtocol)` 重载），压根不会去查语言包。典型的有：
+语言包覆盖的是 **A 类**：SwiftUI 里以字面量形式出现的文案（`Text("…")`、`Button("…")`、
+`.help("…")`、`.navigationTitle("…")` …）。这一类**已经 100% 覆盖**，而且是可校验的：
+`tools/extract-missing.py` 每次扫出的高置信度待翻译清单都是空的，CI 每次提交都会跑。
+
+**B 类则无法**用 `.strings` 覆盖：上游把它们写在枚举 `rawValue`、计算属性或三元表达式里，
+最终以 `Text(<String>)` / `.help(<String>)` 的「逐字渲染」通道（`Text(_ content: some
+StringProtocol)` 重载）输出，压根不会去查语言包。典型的有：
 
 | 类别 | 例子 | 原因 |
 |---|---|---|
@@ -173,6 +181,10 @@ StringProtocol)` 重载），压根不会去查语言包。典型的有：
 
 想覆盖这部分只有改源码重编译（改 `rawValue` 会破坏 `.comp` 文件格式，必须改成
 查表）。详见 [`docs/研究报告.md`](docs/研究报告.md) 的「A 类 vs B 类」一节。
+
+> 自 **1.5.3-1** 起，新功能的 B 类文案也会先翻译入库（见
+> [CHANGELOG](CHANGELOG.md) 的「准备项说明」）：现在不生效，但上游把这些调用点改成
+> `LocalizedStringKey` 之后就能直接生效，不需要再补翻译。
 
 ---
 

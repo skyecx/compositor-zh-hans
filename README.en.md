@@ -6,6 +6,10 @@
 [![Compositor](https://img.shields.io/badge/Compositor-1.5.3-success.svg)](https://github.com/robbietilton/Compositor)
 [![Strings](https://img.shields.io/badge/strings-926-orange.svg)](docs/术语对照表.md)
 
+> **Currently targets** [Compositor 1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3)
+> (CFBundleVersion 49) · 926 entries · last updated 2026-10-19. See
+> [Releases](https://github.com/skyecx/compositor-zh-hans/releases) / [CHANGELOG.md](CHANGELOG.md) (Chinese).
+
 [Compositor](https://github.com/robbietilton/Compositor) is a native macOS image
 editor written in SwiftUI. It ships with **no localization infrastructure at all**
 — every UI string is hardcoded English, there are no `.lproj` bundles, and there
@@ -111,6 +115,7 @@ change.
 | `watchdog.sh` | The watchdog invoked by the LaunchAgent |
 | `卸载汉化.sh` | Uninstall: removes pack + plist edits + watchdog |
 | `zh-Hans.lproj/Localizable.strings` | **The language pack** — 926 entries |
+| `CHANGELOG.md` | Per-release notes: translation batches, tool fixes (Chinese) |
 | `docs/研究报告.md` | Reverse-engineering notes, pitfalls, coverage analysis |
 | `docs/术语对照表.md` | Full EN→ZH glossary (generated) |
 | `tools/` | Maintenance tools (extract, validate, regenerate glossary) |
@@ -142,9 +147,15 @@ use `%lld`, strings use `%@`. A mismatch fails *silently*, hence the checker.
 
 ## Known limitations
 
-~95% of the UI is covered. The remaining ~5% **cannot** be covered by
-`.strings` at all, because those strings are handed to SwiftUI's verbatim
-`Text(_ content: some StringProtocol)` overload and never hit the bundle:
+The pack covers **class A**: SwiftUI strings written as literals (`Text("…")`,
+`Button("…")`, `.help("…")`, `.navigationTitle("…")`, …). That class is
+**100% covered** and the claim is machine-checked — `tools/extract-missing.py`
+reports an empty high-confidence list, run on every commit in CI.
+
+**Class B cannot** be covered by `.strings` at all: upstream writes those
+strings in enum `rawValue`s, computed properties or ternaries, so they end up in
+SwiftUI's verbatim `Text(_ content: some StringProtocol)` overload and never hit
+the bundle:
 
 | Kind | Examples | Cause |
 |---|---|---|
@@ -154,6 +165,11 @@ use `%lld`, strings use `%@`. A mismatch fails *silently*, hence the checker.
 
 Reaching 100% would require a source patch (editing `rawValue` directly would
 corrupt the `.comp` file format — lookups would have to be introduced instead).
+
+> Since **1.5.3-1**, class-B strings belonging to new features are translated and
+> shipped anyway (see the "prepared entries" section of the [CHANGELOG](CHANGELOG.md)):
+> they change nothing today, but take effect the moment upstream switches those
+> call sites to `LocalizedStringKey`.
 
 ---
 
