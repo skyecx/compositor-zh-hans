@@ -3,8 +3,8 @@
 **External injection · no upstream source changes · survives app auto-updates**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Compositor](https://img.shields.io/badge/Compositor-1.0.4-success.svg)](https://github.com/robbietilton/Compositor)
-[![Strings](https://img.shields.io/badge/strings-523-orange.svg)](docs/术语对照表.md)
+[![Compositor](https://img.shields.io/badge/Compositor-1.5.3-success.svg)](https://github.com/robbietilton/Compositor)
+[![Strings](https://img.shields.io/badge/strings-926-orange.svg)](docs/术语对照表.md)
 
 [Compositor](https://github.com/robbietilton/Compositor) is a native macOS image
 editor written in SwiftUI. It ships with **no localization infrastructure at all**
@@ -110,7 +110,7 @@ change.
 | `安装自动恢复.command` | Installs the LaunchAgent only |
 | `watchdog.sh` | The watchdog invoked by the LaunchAgent |
 | `卸载汉化.sh` | Uninstall: removes pack + plist edits + watchdog |
-| `zh-Hans.lproj/Localizable.strings` | **The language pack** — 523 entries |
+| `zh-Hans.lproj/Localizable.strings` | **The language pack** — 926 entries |
 | `docs/研究报告.md` | Reverse-engineering notes, pitfalls, coverage analysis |
 | `docs/术语对照表.md` | Full EN→ZH glossary (generated) |
 | `tools/` | Maintenance tools (extract, validate, regenerate glossary) |

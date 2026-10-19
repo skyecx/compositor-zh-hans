@@ -26,11 +26,56 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STRINGS = os.path.join(ROOT, "zh-Hans.lproj", "Localizable.strings")
 
 ENTRY = re.compile(r'^\s*"((?:[^"\\]|\\.)*)"\s*=\s*"((?:[^"\\]|\\.)*)"\s*;\s*(?://.*)?$')
-LITERAL = re.compile(r'"((?:[^"\\]|\\.)*)"')
+def string_literals(line):
+    """提取一行 Swift 代码里的字符串字面量（保留 \\(...) 插值原文）。
+
+    直接用正则 "([^"\\\\]|\\\\.)*" 是不行的：插值里可以再嵌字符串，例如
+        .help("Other formats: TIFF and PDF\\(others.contains(.exr) ? ", and EXR…" : "")")
+    正则会在插值里第一个引号处就把字面量截断，于是 key 被算成
+    "Other formats: TIFF and PDF%" 这种错误的东西，真正的词条反而报成缺失。
+    这里改成手写状态机：外层字符串 → 插值（可嵌套括号 / 嵌套字符串）→ 回到外层。
+    """
+    out, i, n = [], 0, len(line)
+    while i < n:
+        if line[i] != '"':
+            i += 1
+            continue
+        j, depth, nested, buf = i + 1, 0, False, []
+        while j < n:
+            c = line[j]
+            if c == '\\' and j + 1 < n:
+                buf.append(line[j:j + 2])
+                if depth == 0 and line[j + 1] == '(':
+                    depth = 1
+                j += 2
+                continue
+            if depth > 0:
+                if nested:
+                    if c == '"':
+                        nested = False
+                elif c == '"':
+                    nested = True
+                elif c == '(':
+                    depth += 1
+                elif c == ')':
+                    depth -= 1
+            elif c == '"':
+                break
+            buf.append(c)
+            j += 1
+        out.append(''.join(buf))
+        i = j + 1
+    return out
 
 
 def find_interps(s):
-    """找出所有 \\(...) 插值的区间 [(start, end)]，支持任意层嵌套括号。"""
+    """找出所有 \\(...) 插值的区间 [(start, end)]，支持任意层嵌套括号。
+
+    插值表达式里还可能再嵌字符串字面量，例如：
+        "Other formats: TIFF and PDF\\(others.contains(.exr) ? ", and EXR…" : "")"
+    Swift 会把整个 \\(...) 当作一个插值（运行时 key 是 "Other formats: TIFF and PDF%@"），
+    所以扫描括号时要跳过引号里的内容，否则会在字符串中间的括号上提前收尾。
+    """
     spans, i = [], 0
     while True:
         j = s.find('\\(', i)
@@ -38,9 +83,14 @@ def find_interps(s):
             break
         depth, k = 0, j + 1
         while k < len(s):
-            if s[k] == '(':
+            c = s[k]
+            if c == '"':
+                k += 1  # 跳过嵌套字符串字面量
+                while k < len(s) and s[k] != '"':
+                    k += 2 if s[k] == '\\' else 1
+            elif c == '(':
                 depth += 1
-            elif s[k] == ')':
+            elif c == ')':
                 depth -= 1
                 if depth == 0:
                     break
@@ -144,7 +194,7 @@ def scan(src_root):
                 )
                 noisy = bool(NOISE_LINE.search(line))
                 high = bool(UI_CALL.search(line) or UI_MODIFIER.search(line))
-                for lit in LITERAL.findall(line):
+                for lit in string_literals(line):
                     lit = lit.replace('\\"', '"')
                     if len(lit.strip()) < 2 or not re.search(r'[A-Za-z]', lit):
                         continue

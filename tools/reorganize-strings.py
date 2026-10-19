@@ -83,7 +83,7 @@ RULES = [
 
 HEADER = """/*
  * Localizable.strings — Compositor 简体中文语言包
- * 适用版本：Compositor 1.0.4（上游 robbietilton/Compositor）
+ * 适用版本：Compositor 1.5.3（上游 robbietilton/Compositor）
  * 提取方式：扫描 SwiftUI 源码中的 LocalizedStringKey 字面量，覆盖「A 类」可本地化字符串
  * 安装位置：Compositor.app/Contents/Resources/zh-Hans.lproj/Localizable.strings
  *
@@ -91,8 +91,9 @@ HEADER = """/*
  * 修改后请运行：plutil -lint Localizable.strings
  * 生成对照表：python3 tools/gen-glossary.py
  *
- * 注意：本文件不包含「B 类」字符串（枚举 rawValue 派生的下拉项、工具名等），
- *      原因与补齐方案见 docs/研究报告.md。
+ * 注意：为上游改源码后能直接生效，自 1.5.3-1 起也收录了部分新功能的「B 类」文案
+ *      （枚举 rawValue 派生的下拉项、工具名、AppKit 菜单项等）。它们当前不会生效，
+ *      原因与补齐方案见 docs/研究报告.md 的「A 类 vs B 类」一节。
  */
 """
 

@@ -34,7 +34,7 @@ body:
     attributes:
       label: Compositor 版本
       description: 菜单「Compositor › 关于 Compositor」里可以看到
-      placeholder: 1.0.4
+      placeholder: 1.5.3
     validations:
       required: true
   - type: dropdown
