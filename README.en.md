@@ -3,11 +3,11 @@
 **External injection · no upstream source changes · survives app auto-updates**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Compositor](https://img.shields.io/badge/Compositor-1.5.3-success.svg)](https://github.com/robbietilton/Compositor)
-[![Strings](https://img.shields.io/badge/strings-926-orange.svg)](docs/术语对照表.md)
+[![Compositor](https://img.shields.io/badge/Compositor-1.6.6-success.svg)](https://github.com/robbietilton/Compositor)
+[![Strings](https://img.shields.io/badge/strings-1127-orange.svg)](docs/术语对照表.md)
 
-> **Currently targets** [Compositor 1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3)
-> (CFBundleVersion 49) · 926 entries · last updated 2026-10-19. See
+> **Currently targets** [Compositor 1.6.6](https://github.com/robbietilton/Compositor/releases/tag/v1.6.6)
+> (CFBundleVersion 65) · 1127 entries · last updated 2026-11-10. See
 > [Releases](https://github.com/skyecx/compositor-zh-hans/releases) / [CHANGELOG.md](CHANGELOG.md) (Chinese).
 
 [Compositor](https://github.com/robbietilton/Compositor) is a native macOS image
@@ -114,7 +114,8 @@ change.
 | `安装自动恢复.command` | Installs the LaunchAgent only |
 | `watchdog.sh` | The watchdog invoked by the LaunchAgent |
 | `卸载汉化.sh` | Uninstall: removes pack + plist edits + watchdog |
-| `zh-Hans.lproj/Localizable.strings` | **The language pack** — 926 entries |
+| `zh-Hans.lproj/Localizable.strings` | **The language pack** — 1127 entries |
+| `更新.command` / `更新.sh` | **Double-click**: check upstream → download official DMG → reinstall → re-localize |
 | `CHANGELOG.md` | Per-release notes: translation batches, tool fixes (Chinese) |
 | `docs/研究报告.md` | Reverse-engineering notes, pitfalls, coverage analysis |
 | `docs/术语对照表.md` | Full EN→ZH glossary (generated) |

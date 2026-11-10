@@ -236,6 +236,9 @@ def main():
             if hit:
                 covered.add(hit)
                 continue
+        # 纯占位符 / 标点的 key（如 "%@ %@"、" · %@"）没法翻译，不当作缺失
+        if not re.search(r'[A-Za-z]', hint_of(lit)):
+            continue
         (missing_hi if high else missing_lo).append((lit, where))
 
     # 已被 missing_hi 的插值模式覆盖的 key，不算失效

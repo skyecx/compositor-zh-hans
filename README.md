@@ -1,12 +1,12 @@
 # Compositor 简体中文汉化包
 
-**外挂式注入 · 不改上游源码 · App 自动更新后自动恢复汉化**
+**外挂式注入 · 不改上游源码 · 自带一键更新（下载官方 DMG + 重新汉化）**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Compositor](https://img.shields.io/badge/Compositor-1.5.3-success.svg)](https://github.com/robbietilton/Compositor)
-[![词条](https://img.shields.io/badge/词条-926-orange.svg)](docs/术语对照表.md)
+[![Compositor](https://img.shields.io/badge/Compositor-1.6.6-success.svg)](https://github.com/robbietilton/Compositor)
+[![词条](https://img.shields.io/badge/词条-1127-orange.svg)](docs/术语对照表.md)
 
-> **当前适配**：[Compositor 1.5.3](https://github.com/robbietilton/Compositor/releases/tag/v1.5.3)（CFBundleVersion 49）· 语言包 926 条 · 最近更新 2026-10-19
+> **当前适配**：[Compositor 1.6.6](https://github.com/robbietilton/Compositor/releases/tag/v1.6.6)（CFBundleVersion 65）· 语言包 1127 条 · 最近更新 2026-11-10
 > 版本变化看 [Releases](https://github.com/skyecx/compositor-zh-hans/releases) / [CHANGELOG.md](CHANGELOG.md)。
 
 [Compositor](https://github.com/robbietilton/Compositor) 是一个用 SwiftUI 写的原生 macOS
@@ -90,12 +90,13 @@ graph LR
 
 | 文件 | 作用 |
 |---|---|
-| `一键汉化.command` | **双击运行**：汉化 + 安装自动恢复守护（推荐） |
+| `更新.command` / `更新.sh` | **双击运行**：检查更新 → 下载官方 DMG → 替换 App → 重新汉化（推荐用这个升级） |
+| `一键汉化.command` | **双击运行**：汉化 + 安装自动恢复守护 |
 | `汉化.sh` | 实际的汉化脚本。支持 `--check` 只检查不改 |
 | `安装自动恢复.command` | 单独安装 LaunchAgent 守护（`一键汉化` 已包含） |
 | `watchdog.sh` | 守护脚本本体，被 LaunchAgent 调用 |
 | `卸载汉化.sh` | 移除语言包、恢复 Info.plist、卸载守护 |
-| `zh-Hans.lproj/Localizable.strings` | **语言包本体**，926 条词条 |
+| `zh-Hans.lproj/Localizable.strings` | **语言包本体**，1127 条词条 |
 | `CHANGELOG.md` | 每个语言包版本改了什么（翻译批次、工具修复、已知限制变化） |
 | `docs/研究报告.md` | 逆向过程、踩坑记录、覆盖率分析 |
 | `docs/术语对照表.md` | 全部词条的中英对照（自动生成） |
@@ -103,13 +104,46 @@ graph LR
 
 ---
 
-## App 更新后怎么办
+## App 更新怎么办
 
-### 自动（默认，装了守护就有）
+### 首选：双击 `更新.command`
 
-`一键汉化.command` 会安装一个 LaunchAgent，它监听
-`/Applications/Compositor.app` 的变化。Sparkle 更新完 App 后，守护脚本会自动
-把汉化重新装回去：
+汉化版的**应用内「检查更新…」装不上新版本**（原因见下一节，是签名链决定的，不是 bug），
+所以更新请走这个脚本：它会读上游 appcast → 下载官方 DMG → 整包替换 → 自动重新汉化 → 重开 App。
+
+```bash
+bash 更新.command          # 双击也行
+bash 更新.sh --check       # 只看「本机版本 / 上游最新版本」，不改动
+bash 更新.sh --force       # 同版本也重装一遍
+```
+
+### 为什么应用内更新用不了
+
+汉化必须改 App 包内容并 **ad-hoc 重签**，而 ad-hoc 签名**没有 Team ID**。Sparkle 的安装器
+XPC 服务要求客户端签名满足（苹果在服务端写死的嗅探条件）：
+
+```
+anchor apple generic and certificate leaf[subject.OU] = "3E4X3B9Z9T"
+```
+
+实测日志（`log show --predicate 'process == "Installer"'`）：
+
+```
+Installer  Code-signing requirement ((anchor apple generic and certificate leaf[subject.OU] = "3E4X3B9Z9T")) set on connection
+Installer  (XPCSupport) xpc_support_check_token: error status: -67050
+Installer  Received message forbidden due to code signing requirement
+Compositor Error: 连接到安装程序时出现错误，请稍后再试。
+```
+
+也就是说：只要汉化重签过，Sparkle 就永远连不上安装器；即使连上，`SUUpdateValidator` 也会
+因为新旧包签名主体不同而拒绝安装。这是上游防止改包后自更新的设计，外挂汉化绕不过去。
+
+> 副作用：`一键汉化.command` 装的守护（监听 App 变化后自动补汉化）也只有在
+> **你手动把新 App 拷进 /Applications** 时才有机会触发；正常更新请直接用 `更新.command`。
+
+### 手动补汉化
+
+如果只是 App 被替换了（比如自己拖了新版 DMG 进来），补一次汉化即可：
 
 ```bash
 # 看守护日志
@@ -119,11 +153,19 @@ tail -f ~/Library/Logs/compositor-hanhua.log
 launchctl print gui/$UID/com.wonderassembly.compositor.hanhua | head -5
 ```
 
-### 手动
-
 ```bash
 bash 汉化.sh            # 自动找 /Applications/Compositor.app
 bash 汉化.sh --check    # 只检查状态（已汉化返回 0，需要汉化返回 1）
+```
+
+### 守护日志
+
+```bash
+# 看守护日志
+tail -f ~/Library/Logs/compositor-hanhua.log
+
+# 看守护是否在跑
+launchctl print gui/$UID/com.wonderassembly.compositor.hanhua | head -5
 ```
 
 ---
@@ -205,9 +247,16 @@ macOS 14+ 往 `/Applications` 写文件需要授权。到
 **系统设置 › 隐私与安全性 › App 管理**，把「终端」（或你用的终端 App）打开。
 或者把 Compositor 装到 `~/Applications` 再汉化。
 
-**Q：会影响 Compositor 自动更新吗？**
+**Q：为什么点「检查更新…」没反应 / 装不上？**
 
-不会。已实测：汉化后 Sparkle 仍能正常拉取 appcast 并检查更新。
+汉化重签后 Sparkle 连不上自己的安装器 XPC 服务（签名要求 `subject.OU = "3E4X3B9Z9T"`），
+这是签名链决定的，绕不过去。请双击 **`更新.command`** 升级，细节见上文
+「[为什么应用内更新用不了](#为什么应用内更新用不了)」。
+
+**Q：会影响 Compositor 的自动更新机制吗？**
+
+不影响 App 本身的运行，但汉化版**不能**用应用内更新（同上）。appcast 拉取是正常的，
+所以 `更新.command` 直接复用了上游 appcast 取最新版号和下载地址。
 原理见研究报告（Sparkle 2 的 `SUUpdateValidator` 允许签名主体变化，而
 `SUPublicEDKey` 我们没有动）。
 

@@ -1,6 +1,6 @@
 /*
  * Localizable.strings — Compositor 简体中文语言包
- * 适用版本：Compositor 1.5.3（上游 robbietilton/Compositor）
+ * 适用版本：Compositor 1.6.6（上游 robbietilton/Compositor）
  * 提取方式：扫描 SwiftUI 源码中的 LocalizedStringKey 字面量，覆盖「A 类」可本地化字符串
  * 安装位置：Compositor.app/Contents/Resources/zh-Hans.lproj/Localizable.strings
  *
@@ -70,6 +70,15 @@
 "What’s new\n" = "更新内容\n";
 "Couldn’t export" = "无法导出";
 "Choose a JPEG, PNG, HEIC, HEIF, TIFF, WebP, or Photoshop (PSD) file." = "请选择 JPEG、PNG、HEIC、HEIF、TIFF、WebP 或 Photoshop (PSD) 文件。";
+"Import…" = "导入…";
+"Enter a positive ratio within the document size limits." = "请输入在文档尺寸限制内的正数比例。";
+"How brightly lights open into discs" = "光源化为光斑的亮度";
+"Close search" = "关闭搜索";
+"Close the search" = "关闭搜索";
+"The copied GIFs exceed this project’s animation memory limit." = "复制的 GIF 超出本项目的动画内存上限。";
+"Export Layers as PNGs…" = "将图层导出为多个 PNG…";
+"Couldn’t export layers" = "无法导出图层";
+"This PDF is password-protected. Save an unlocked copy, then import that." = "此 PDF 受密码保护。请先另存为无密码副本，再导入该副本。";
 
 /* ===== 编辑 ===== */
 "Undo" = "撤销";
@@ -106,6 +115,15 @@
 "Edit" = "编辑";
 "Clear Guides" = "清除参考线";
 "Clear Menu" = "清除菜单";
+"How far into the scene the haze begins: low reaches up to the camera, high leaves all but the farthest parts clear" = "雾气从景物多远处开始：较低时一直延伸到镜头前，较高时除最远处外都保持清澈";
+"Keep Subject Clear" = "保持主体清晰";
+"Keep the subject clear of the haze; off, it's hazed by its own distance, so a figure far off is misted" = "让主体不受雾气影响；关闭后主体按自身距离被雾化，远处的人影会被雾气笼罩";
+"Split each copy's red and blue apart, as glass does; 0 keeps the copies crisp" = "如玻璃般将每个副本的红蓝分离；为 0 时副本保持清晰";
+"Delete Frame" = "删除帧";
+"Clear All" = "全部清除";
+"Clear search" = "清除搜索";
+"Delete GIF Frame" = "删除 GIF 帧";
+"Delete GIF Frames" = "删除 GIF 帧";
 
 /* ===== 图像 / 画布 ===== */
 "Image Size" = "图像大小";
@@ -178,6 +196,8 @@
 "Click and drag two points on canvas" = "在画布上点击并拖动两个点";
 "Resolution: 72 for screens, 300 for print. Click to switch." = "分辨率：屏幕用 72，印刷用 300。点击切换。";
 "Toggle Fullscreen: the canvas alone on black (Esc also leaves)" = "切换全屏：仅画布置于黑色背景（Esc 亦可退出）";
+"1 frame · Still canvas" = "1 帧 · 静止画布";
+"Create a canvas or import a file." = "新建画布或导入文件。";
 
 /* ===== 视图 / 缩放 ===== */
 "Zoom" = "缩放";
@@ -209,6 +229,10 @@
 "Vertical ruler" = "垂直标尺";
 "New Guide" = "新建参考线";
 "Delete Guide" = "删除参考线";
+"Play animation preview" = "播放动画预览";
+"Pause animation preview" = "暂停动画预览";
+"Play the animation preview." = "播放动画预览。";
+"Pause the animation preview." = "暂停动画预览。";
 
 /* ===== 图层 ===== */
 "Layers" = "图层";
@@ -286,6 +310,20 @@
 "Start see-through, or with a white or black Background layer. Click to switch." = "以透明开始，或以白色／黑色背景图层开始。点击切换。";
 "16-bit layer: keeps 16 bits a channel" = "16 位图层：每通道保留 16 位";
 "HDR layer: keeps light brighter than white, shown as white" = "HDR 图层：保留高于白色的亮度，并显示为白色";
+"Pen pressure sets the opacity: a light touch paints fainter, up to the brush’s Opacity" = "笔压控制不透明度：轻按绘出更淡的笔迹，上限为画笔的不透明度";
+"Pressure for opacity" = "笔压控制不透明度";
+"Split the layer's original channels into four grayscale layers, Red, Green, Blue and Alpha, for Export As › Channel Pack. Color under fully transparent pixels can't be recovered" = "将该图层的原始通道分离为红、绿、蓝、Alpha 四个灰度图层，供「导出为 › 通道打包」使用。完全透明像素下方的颜色无法恢复";
+"Close the filter and add the depth the haze goes by as a new layer: white is near, black is far" = "关闭滤镜，并将雾气依据的深度图作为新图层添加：白色为近，黑色为远";
+"Duplicate Frame" = "复制帧";
+"Show only some kinds of layer" = "仅显示部分类型的图层";
+"Filter the layer list" = "筛选图层列表";
+"New filter layer" = "新建滤镜图层";
+"Duplicate GIF Frame" = "复制 GIF 帧";
+"Export Layer as PNG" = "将图层导出为 PNG";
+"Export Layer as PNG…" = "将图层导出为 PNG…";
+"A layer with no visible pixels, such as an adjustment layer, isn’t saved as a PNG." = "没有可见像素的图层（例如调整图层）不会被存为 PNG。";
+"Each channel from a layer, read as grayscale · PNG" = "各通道来自图层，按灰度读取 · PNG";
+"Import a file or add a blank layer." = "导入文件或添加空白图层。";
 
 /* ===== 蒙版 ===== */
 "Delete Layer Mask" = "删除图层蒙版";
@@ -386,6 +424,12 @@
 "Move the red and blue apart, for colored fringes on the lines" = "将红、蓝通道错开，使线条产生彩色边缘";
 "Click or drag to move the view" = "点击或拖动以移动视图";
 "Move / Transform" = "移动 / 变换";
+"Click or drag on the canvas to move the center" = "在画布上点击或拖动以移动中心";
+"Click or drag on the canvas to move the light" = "在画布上点击或拖动以移动光源";
+"How many pixels to expand, contract or feather the selection by" = "选区扩展、收缩或羽化的像素数";
+"Solid, dashed or dotted; dashes grow with the line's width" = "实线、虚线或点线；虚线段随线条宽度增长";
+"Line layers up with each other, the selection, or the canvas when one is selected" = "将图层彼此对齐、与选区对齐，或（选中单个图层时）与画布对齐";
+"Animated GIF: select it to show its frames under the canvas" = "动画 GIF：选中后可在画布下方显示各帧";
 
 /* ===== 调整 / 滤镜 ===== */
 "Curves…" = "曲线…";
@@ -479,6 +523,20 @@
 "This file has no lens profile" = "该文件没有镜头配置文件";
 "Smooths grain, at the cost of fine detail" = "平滑颗粒，但会损失细节";
 "Removes the lens's distortion and vignetting" = "移除镜头的畸变与暗角";
+"How much grain is smoothed from the picture's brightness" = "按画面亮度平滑颗粒的程度";
+"How much fine texture and edges are kept while the grain is smoothed" = "平滑颗粒时保留细微纹理与边缘的程度";
+"How far the lens's coatings turn each streak blue along its length; none keeps the light's own color" = "镜片镀膜使光线沿长度变蓝的程度；为 0 时保持光源本身的颜色";
+"How many spikes each light has, as the lens's aperture blades make them" = "每个光源的星芒数量，效果如同镜头光圈叶片";
+"Lens Effects" = "镜头效果";
+"Reduce Noise" = "减少杂色";
+"Sharpen" = "锐化";
+"No layers match the filter." = "没有符合筛选条件的图层。";
+"Filter to image layers" = "仅显示图像图层";
+"Filter to folder layers" = "仅显示文件夹图层";
+"Filter to text layers" = "仅显示文字图层";
+"Filter to shape layers" = "仅显示形状图层";
+"Filter to adjustment layers" = "仅显示调整图层";
+"Filter to the selected layers" = "仅显示所选图层";
 
 /* ===== 混合模式 ===== */
 "Subtract" = "减去";
@@ -517,6 +575,8 @@
 "Color Split" = "色彩分离";
 "Color Picker (Light Color)" = "拾色器（浅色）";
 "Color Picker (Dark Color)" = "拾色器（深色）";
+"Add Light" = "添加光源";
+"Color Noise" = "彩色杂色";
 
 /* ===== 颜色 / 色板 ===== */
 "Remove Background" = "移除背景";
@@ -560,6 +620,11 @@
 "Export Background" = "导出背景";
 "Choose the lines' color" = "选择线条颜色";
 "Choose the screen's color" = "选择屏幕颜色";
+"The color before: click to go back to it" = "之前的颜色：点击可回到该颜色";
+"Current color" = "当前颜色";
+"Choose the light's color" = "选择光源颜色";
+"Let the lights glow in the air around the subject, blending them into the background" = "让光源在主体周围的空气中发光，并融入背景";
+"Choose this light's color" = "选择该光源的颜色";
 
 /* ===== 工具 ===== */
 "Select a tool" = "选择工具";
@@ -623,6 +688,8 @@
 "Wand" = "魔法棒";
 "Spot Healing Brush" = "污点修复画笔";
 "Hand" = "抓手";
+"Pen pressure sets the size: a light touch paints a thinner line" = "笔压控制大小：轻按绘出更细的线条";
+"The aperture's shape: round wide open, a hexagon of blades, an anamorphic oval, or a cat's eye toward the edges" = "光圈形状：全开时的圆形、叶片形成的六边形、宽银幕的椭圆形，或画面边缘的猫眼形";
 
 /* ===== 界面 / 外观 ===== */
 "Hex color" = "十六进制颜色";
@@ -722,6 +789,26 @@
 "Use 1–%@ pixels per side, up to %lld megapixels, and 1–9,600 pixels/inch." = "单边请使用 1–%@ 像素，最多 %lld 兆像素，以及 1–9,600 像素/英寸。";
 "This import exceeds the current %lld-megapixel document budget or %@-pixel side limit." = "本次导入超出当前 %lld 兆像素的文档预算或单边 %@ 像素的限制。";
 "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." = "该项目超出支持的画布、图层、文件大小或 %lld 兆像素的文档上限。";
+"Selection %lld × %lld px" = "选区 %lld × %lld px";
+" · Feather %lld px" = " · 羽化 %lld px";
+"Enabled masks apply here, as on the canvas. Drag or scroll to move around; double-click switches between Fit and 100%." = "启用的蒙版在此同样生效，与画布一致。拖动或滚动可移动视图；双击在「适合」与 100% 之间切换。";
+"GIF keeps fully transparent or opaque pixels; soft edges use a 50% threshold." = "GIF 仅保留完全透明或完全不透明的像素；柔和边缘以 50% 为阈值。";
+"Other formats: TIFF, PDF and GIF%@, and Channel Pack for game textures" = "其他格式：TIFF、PDF 与 GIF%@，以及用于游戏贴图的通道打包";
+"What fills the %@ channel: a layer or group read as grayscale, or solid black or white" = "填充 %@ 通道的内容：以灰度读取的图层或组，或纯黑、纯白";
+"Light %lld" = "光源 %lld";
+"Frame %lld" = "第 %lld 帧";
+"%@ · Original" = "%@ · 原始";
+"%lld ms · %@ fps" = "%lld 毫秒 · %@ fps";
+"Export %lld Layers as PNGs" = "导出 %lld 个图层为 PNG";
+"“%@” has nothing to export" = "“%@”没有可导出的内容";
+"%lld layers have nothing to export" = "%lld 个图层没有可导出的内容";
+"“%@” already exists. Replace it?" = "“%@”已存在。要替换吗？";
+"%lld of these files already exist in “%@”. Replace them?" = "其中 %lld 个文件已存在于“%@”。要替换吗？";
+"Encoding frame %lld of %lld…" = "正在编码第 %lld 帧，共 %lld 帧…";
+"Couldn’t read GIF frame %lld: %@" = "无法读取 GIF 第 %lld 帧：%@";
+"Page %lld" = "第 %lld 页";
+"Animation export supports up to %@ frames, %lld megapixels across all exported frames, and 512 MiB of encoded data. Reduce the export size or frame count." = "动画导出最多支持 %@ 帧、所有导出帧合计 %lld 兆像素，以及 512 MiB 编码数据。请减小导出尺寸或帧数。";
+"This animation has more than %@ frames, which exceeds the current timeline limit." = "此动画超过 %@ 帧，超出当前时间线上限。";
 
 /* ===== 其他 ===== */
 "Contiguous" = "连续";
@@ -970,3 +1057,117 @@
 "Only 8-bit RGB and CMYK Photoshop files can be imported." = "只能导入 8 位 RGB 与 CMYK 的 Photoshop 文件。";
 "CMYK" = "CMYK";
 "Camera Raw…" = "Camera Raw…";
+"Show Extras" = "显示额外内容";
+"Distances" = "距离";
+"Align" = "对齐";
+"Distribute" = "分布";
+"Pressure for size" = "笔压控制大小";
+"Reset colors to black and white (D)" = "将颜色重置为黑与白 (D)";
+"Reset colors" = "重置颜色";
+"Custom…" = "自定…";
+"Custom ratio" = "自定比例";
+"Width:Height" = "宽度:高度";
+"Width:height, such as 4:5 or 3:2" = "宽:高，例如 4:5 或 3:2";
+"Loop" = "循环";
+"Forever" = "永久";
+"Once" = "一次";
+"Transparency" = "透明度";
+"Keep transparent areas" = "保留透明区域";
+"Frames" = "帧";
+"Linear splits along one direction; Radial splits outwards from a center, sharp there" = "线性：沿单一方向分离；径向：自中心向外分离，中心保持清晰";
+"How far the colors spread apart, red one way and blue the other" = "颜色分离的幅度：红色朝一侧、蓝色朝另一侧";
+"Smear the split into streaks along its direction" = "沿分离方向将色彩拖成条带";
+"Which way the colors spread" = "颜色分离的方向";
+"How strongly edges and fine detail are brought out" = "边缘与细节被强化的程度";
+"How fine the detail it sharpens: small for crisp texture, larger for a punchier look" = "锐化的细节尺度：较小让纹理清晰，较大让画面更有冲击力";
+"How much colored speckle is smoothed into the colors around it" = "彩色斑点融入周围色彩的程度";
+"Split to Layers" = "分离到图层";
+"Getting depth…" = "正在获取深度…";
+"Finding the subject…" = "正在查找主体…";
+"Extract Depth" = "提取深度";
+"How thick the air is: haze lit by the light, thinner in front of the subject" = "空气的浓稠度：雾气被光源照亮，主体前方更薄";
+"Spread out depths bunched together, such as a distant city, so the haze builds through them in steps; 0 keeps the depth as the model sees it" = "展开挤在一起的深度（例如远处的城市），使雾气在其中逐层累积；0 保持模型所见的深度";
+"How big the light is" = "光源的大小";
+"How bright the beams are" = "光束的亮度";
+"How far from the light the beams reach" = "光束自光源向外延伸的距离";
+"How much the beams break up into separate shafts" = "光束分散为独立光柱的程度";
+"Remove this light" = "移除该光源";
+"Where the light comes from, behind the subject: 0° from the right, 90° from above" = "主体背后光源的方向：0° 来自右侧，90° 来自上方";
+"How far the light wraps around the subject's edges" = "光源环绕主体边缘的范围";
+"How the light ends on the inside: low feathers it off softly from the edge, high holds it bright and ends it crisply" = "光源在内侧的收束方式：较低时自边缘柔和淡出，较高时保持明亮并以清晰边界收束";
+"Light the subject from another side as well" = "再从另一侧照亮主体";
+"Effect" = "效果";
+"How far the streaks reach across the picture" = "光线在画面中延伸的距离";
+"How bright a light has to be to flare; near 100, only the biggest, brightest spots" = "光源需多亮才会产生光晕；接近 100 时仅最大最亮的点会闪光";
+"How far the spikes reach" = "星芒的延伸距离";
+"How bright a light has to be to sparkle; near 100, only the biggest, brightest spots" = "光源需多亮才会产生星芒；接近 100 时仅最大最亮的点会闪耀";
+"Points" = "角数";
+"How much light scatters: a soft halo around bright areas, and gently lifted shadows" = "光线散射的程度：亮部周围出现柔和光晕，暗部被轻微提亮";
+"How far the light spreads" = "光线扩散的范围";
+"How many times the picture echoes, each fainter" = "画面重复的次数，每次更淡";
+"How far apart the copies are" = "各副本之间的间距";
+"Which way the copies step" = "各副本的偏移方向";
+"Soften the copies, more the farther they're pushed" = "柔化副本，偏移越远越模糊";
+"Direction" = "方向";
+"One Way" = "单向";
+"Both Ways" = "双向";
+"Copies to one side of the picture, or out to both" = "副本只向画面一侧偏移，或向两侧展开";
+"How far out of focus: the size of each disc" = "失焦的程度：每个光斑的大小";
+"Light gathered at each disc's rim, as some lenses draw it" = "光斑边缘聚集的光量，如同某些镜头的成像";
+"How long each frame shows" = "每帧的显示时长";
+"Cap" = "端点";
+"How the line's ends, and each of its dashes and dots, are finished" = "线条两端以及各虚线段、点的收尾方式";
+"RGB Split" = "RGB 分离";
+"Volumetric Light" = "体积光";
+"Rim Light" = "边缘光";
+"Channel Pack" = "通道打包";
+"Split Channels" = "分离通道";
+"Anamorphic Flare" = "变形宽银幕光晕";
+"Starburst" = "星芒";
+"Mist" = "薄雾";
+"Prism" = "棱镜";
+"Bokeh" = "散景";
+"Round" = "圆形";
+"Hexagon" = "六边形";
+"Oval" = "椭圆形";
+"Cat's Eye" = "猫眼形";
+"Length" = "长度";
+"Copies" = "副本数";
+"Fringe" = "彩色边缘";
+"Ring" = "环状";
+"Brightness" = "亮度";
+"Choke" = "收缩";
+"Haze" = "雾霭";
+"Shafts" = "光束";
+"Intensity" = "强度";
+"Alpha" = "Alpha";
+"Depth Contrast" = "深度对比";
+"Preserve Details" = "保留细节";
+"Search layers" = "搜索图层";
+"Search layers by name" = "按名称搜索图层";
+"Images" = "图像";
+"Folders" = "文件夹";
+"Shapes" = "形状";
+"Adjustments" = "调整";
+"Left Edges" = "左边缘";
+"Right Edges" = "右边缘";
+"Top Edges" = "顶边缘";
+"Bottom Edges" = "底边缘";
+"Horizontal Centers" = "水平居中";
+"Vertical Centers" = "垂直居中";
+"Horizontal Spacing" = "水平间距";
+"Vertical Spacing" = "垂直间距";
+"Play" = "播放";
+"Pause" = "暂停";
+"Frame delay" = "帧延迟";
+"Same for all" = "全部相同";
+"Change GIF Delays" = "更改 GIF 延迟";
+"The selected animation timeline is missing or invalid." = "所选动画的时间线缺失或无效。";
+"Choose a folder for the layers’ PNGs." = "为图层的 PNG 选择文件夹。";
+"Replace" = "替换";
+"Up to 256 colors · sRGB" = "最多 256 色 · sRGB";
+"Search Fonts" = "搜索字体";
+"Solid" = "实线";
+"Dashed" = "虚线";
+"Dotted" = "点线";
+"Long Dash" = "长虚线";

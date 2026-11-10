@@ -83,7 +83,7 @@ RULES = [
 
 HEADER = """/*
  * Localizable.strings — Compositor 简体中文语言包
- * 适用版本：Compositor 1.5.3（上游 robbietilton/Compositor）
+ * 适用版本：Compositor 1.6.6（上游 robbietilton/Compositor）
  * 提取方式：扫描 SwiftUI 源码中的 LocalizedStringKey 字面量，覆盖「A 类」可本地化字符串
  * 安装位置：Compositor.app/Contents/Resources/zh-Hans.lproj/Localizable.strings
  *

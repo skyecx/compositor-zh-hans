@@ -2,6 +2,54 @@
 
 本项目的版本号跟随上游：`<Compositor 版本>-<语言包修订号>`。
 
+## 1.6.6-1 — 2026-11-10
+
+### 新增
+- 适配 Compositor **1.6.6**（CFBundleVersion 65，2026-11-08 发布），一次跨过 12 个版本（1.5.4 → 1.6.6）。
+- 补齐 `extract-missing.py` 扫出的 **105 条高置信度**文案（全部生效），另加 **96 条**新功能文案（准备项），词条 926 → **1127**。覆盖范围：
+  - **Lens Effects 镜头效果**（1.5.7–1.5.8）：变形宽银幕光晕 / 星芒 / 薄雾 / 棱镜 / 散景，全套参数 tooltip
+  - **Volumetric Light 体积光**（1.5.9–1.6.1）与 **Rim Light 边缘光**：深度提取、雾霭、光束、多光源
+  - **GIF 动画**（1.5.6）：时间线、帧复制 / 删除、帧延迟、循环、播放暂停、动画导出提示
+  - **Reduce Noise 减少杂色**、**RGB Split**、**Sharpen** 的参数 tooltip
+  - **导出为…**：GIF（循环 / 透明 / 帧数）、通道打包 Channel Pack、把选中的图层导出为 PNG
+  - **图层搜索与筛选**、**对齐 / 分布**、**笔压（笔压控制大小 / 不透明度）**
+  - **色板对比**（当前颜色 / 之前的颜色）、**裁剪自定比例**、形状**端点 Cap**、选区尺寸与羽化状态栏
+- 两条 keep-as-is：`Alpha`（与既有 `RGB`、`px` 同类）。
+
+### 重要：应用内更新为什么装不上（已定位 + 已绕开）
+汉化必须改 App 包内容并 **ad-hoc 重签**，而 ad-hoc 签名**没有 Team ID**。Sparkle 的安装器 XPC 服务
+在服务端写死了客户端签名要求：
+
+```
+anchor apple generic and certificate leaf[subject.OU] = "3E4X3B9Z9T"
+```
+
+实测日志（`log show --predicate 'process == "Installer"'`）：
+
+```
+Installer  Code-signing requirement ((anchor apple generic and certificate leaf[subject.OU] = "3E4X3B9Z9T")) set on connection
+Installer  (XPCSupport) xpc_support_check_token: error status: -67050
+Installer  Received message forbidden due to code signing requirement
+Compositor [org.sparkle-project.Sparkle:Sparkle] Error: 连接到安装程序时出现错误，请稍后再试。
+```
+
+结论：**汉化版永远无法用 Sparkle 自更新**；即使 XPC 能连上，`SUUpdateValidator` 也会因新旧包
+签名主体不同而拒绝安装。这是上游防止改包后自更新的设计，外挂汉化绕不过去。
+
+解决办法：新增 **`更新.command` / `更新.sh`** —— 读上游 appcast → 下载官方 DMG → 整包替换 →
+自动重新汉化 → 重开 App，一条命令完成。已用 `--force` 跑通全流程实测。
+
+### 工具
+- `extract-missing.py`：新增「纯占位符 key」过滤 —— `"%@ %@"`、`" · %@"` 这类没有字母的 key
+  无法翻译（翻译了也只填英文字段），不再被当成缺失。
+
+### 状态
+- 高置信度缺失：**0 条**
+- `stale` 62 条（上游改名：`Export JPEG` / `Export JPEG…` / `Import image` → `导入…` 等，按惯例保留不删）
+- `check-strings.py` 警告 7 条（新增 `Alpha` 一条 keep-as-is，其余 6 条为既有）
+
+[1.6.6-1]: https://github.com/skyecx/compositor-zh-hans/releases
+
 ## 1.5.3-1 — 2026-10-19
 
 ### 新增
